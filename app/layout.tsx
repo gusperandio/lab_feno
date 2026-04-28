@@ -1,21 +1,14 @@
-import { Geist, Geist_Mono, Merriweather, DM_Sans } from "next/font/google"
+import "@/styles/globals.css"
+import { Geist, Geist_Mono } from "next/font/google"
 
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
-
-const dmSansHeading = DM_Sans({subsets:['latin'],variable:'--font-heading'});
-
-const merriweather = Merriweather({subsets:['latin'],variable:'--font-serif'});
-
-const fontSans = Geist({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-sans",
 })
 
-const fontMono = Geist_Mono({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  variable: "--font-mono",
 })
 
 export default function RootLayout({
@@ -25,13 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       suppressHydrationWarning
-      className={cn("antialiased", fontSans.variable, fontMono.variable, "font-serif", merriweather.variable, dmSansHeading.variable)}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   )
 }

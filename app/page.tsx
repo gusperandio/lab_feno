@@ -23,7 +23,6 @@ import {
   X,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Highlighter } from "@/components/ui/highlighter"
 import { Header } from "@/components/Header"
 import SplitText from "@/components/SplitText"
 import { cn } from "@/lib/utils"
@@ -67,7 +66,7 @@ const highlights = [
     icon: GraduationCap,
   },
   {
-    title: "Revista FHC",
+    title: "Revista PHS",
     text: "Publicação científica editada pelo LabFeno e APFeno, em parceria com Abrapfe.",
     icon: Newspaper,
   },
@@ -157,7 +156,7 @@ const alumniGroups = [
       "Camila Mühl",
       "Diego do Nascimento Mendonça",
       "Douglas Fernando Henrique de Oliveira",
-      "Fabiane Orengo",
+      "Fabiane Villatore Orengo",
       "Guilherme Bertassoni da Silva",
       "Isabela da Silva Perotti",
       "Jennifer da Silva Moreira",
@@ -632,6 +631,7 @@ const journalDialogSections = [
 const personImagesByName: Record<string, string> = {
   "adriana patricia egg serra": "/person/Adriana Patrícia Egg Serra.jpeg",
   "adriano furtado holanda": "/person/Adriano Furtado Holanda.jpg",
+  "alex ander de souza orengo": "/person/Alex Ander de Souza Orengo.jpeg",
   "alan muller": "/person/Alan Muller.jpg",
   "andre fukuda maeji": "/person/André Fukuda Maeji.jpeg",
   "brenda santos vieira": "/person/Brenda Santos Vieira.jpg",
@@ -649,6 +649,10 @@ const personImagesByName: Record<string, string> = {
   "luciana maisa da silva sydor": "/person/Luciana Maísa da Silva Sydor.jpeg",
   "maira isabel saczuk": "/person/Maira Isabel Saczuk.jpg",
   "mariana puchivailo": "/person/Mariana Puchivailo.jpg",
+  "nicole krachenski": "/person/Nicole Krachenski.jpg",
+  "pedro luis tizo santos": "/person/Pedro Luis Tizo Santos.jpg",
+  "poliana gomes goslar": "/person/Poliana Gomes Goslar.jpg",
+  "rodrigo pereira ceccon": "/person/Rodrigo Pereira Ceccon.jpg",
 }
 
 function normalizePersonName(name: string) {
@@ -789,7 +793,7 @@ function CoordinatorDialog({ member }: { member: Member }) {
 
       {open ? (
         <div
-          className="fixed inset-0 z-[80] flex items-end justify-center bg-[#14110e]/70 px-4 py-4 backdrop-blur-sm sm:items-center sm:py-8"
+          className="fixed inset-0 z-[80] flex items-end justify-center bg-[#14110e]/70 px-3 pt-10 pb-3 backdrop-blur-sm sm:items-center sm:px-4 sm:py-8"
           role="presentation"
           onClick={() => setOpen(false)}
         >
@@ -800,17 +804,17 @@ function CoordinatorDialog({ member }: { member: Member }) {
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.25 }}
-            className="max-h-[88svh] w-full max-w-5xl overflow-hidden border border-[#c8b27d]/70 bg-[#fbf8ef] text-[#24160f] shadow-[0_30px_100px_rgba(20,17,14,0.38)]"
+            className="max-h-[92svh] w-full max-w-5xl overflow-hidden border border-[#c8b27d]/70 bg-[#fbf8ef] text-[#24160f] shadow-[0_30px_100px_rgba(20,17,14,0.38)]"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[#d9c9a5] bg-[#fbf8ef]/95 p-5 backdrop-blur-md sm:p-7">
-              <div>
+            <div className="sticky top-0 z-10 flex items-start justify-between gap-3 border-b border-[#d9c9a5] bg-[#fbf8ef]/95 p-4 backdrop-blur-md sm:gap-4 sm:p-7">
+              <div className="min-w-0">
                 <p className="font-heading text-xs font-semibold tracking-[0.22em] text-[#7a2e2e] uppercase">
                   {member.role}
                 </p>
                 <h3
                   id={`coordinator-dialog-${normalizePersonName(member.name)}`}
-                  className="font-antique mt-2 text-3xl leading-tight"
+                  className="font-antique mt-2 text-2xl leading-tight sm:text-3xl"
                 >
                   {member.name}
                 </h3>
@@ -825,15 +829,18 @@ function CoordinatorDialog({ member }: { member: Member }) {
               </button>
             </div>
 
-            <div className="grid max-h-[calc(88svh-112px)] overflow-y-auto lg:grid-cols-[320px_minmax(0,1fr)]">
-              <div className="border-b border-[#d9c9a5] bg-[#efe4cf] p-5 sm:p-7 lg:border-r lg:border-b-0">
-                <MemberPortrait name={member.name} className="h-80" />
-                <p className="mt-5 font-heading text-sm font-medium text-[#6b5d47]">
+            <div className="grid max-h-[calc(92svh-96px)] overflow-y-auto lg:grid-cols-[320px_minmax(0,1fr)]">
+              <div className="border-b border-[#d9c9a5] bg-[#efe4cf] p-4 sm:p-7 lg:border-r lg:border-b-0">
+                <MemberPortrait
+                  name={member.name}
+                  className="mx-auto h-56 max-w-72 sm:h-80 sm:max-w-none"
+                />
+                <p className="mt-4 font-heading text-sm leading-6 font-medium text-[#6b5d47] sm:mt-5">
                   {member.note}
                 </p>
               </div>
-              <div className="p-5 sm:p-7">
-                <p className="text-base leading-8 text-[#4b3a2a]">
+              <div className="p-4 sm:p-7">
+                <p className="text-sm leading-7 text-[#4b3a2a] sm:text-base sm:leading-8">
                   {member.fullBio ?? member.bio}
                 </p>
               </div>
@@ -935,7 +942,7 @@ function JournalDialog() {
             <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[#d9c9a5] bg-[#fbf8ef]/95 p-5 backdrop-blur-md sm:p-7">
               <div>
                 <p className="font-heading text-xs font-semibold tracking-[0.22em] text-[#7a2e2e] uppercase">
-                  Revista FHC
+                  Revista PHS
                 </p>
                 <h3
                   id="journal-dialog-title"
@@ -1103,9 +1110,9 @@ export default function Page() {
             <div className="space-y-7 text-lg leading-9 text-[#463728]">
               <p>
                 Desde 2011, o{" "}
-                <Highlighter action="underline" color="#b6863a" isView>
+                <span className="[text-decoration-line:underline] decoration-[#b6863a] decoration-2 underline-offset-4">
                   Laboratório de Fenomenologia e Subjetividade
-                </Highlighter>{" "}
+                </span>{" "}
                 está integrado ao Departamento de Psicologia da Universidade
                 Federal do Paraná e certificado pelo CNPq.
               </p>
@@ -1150,20 +1157,20 @@ export default function Page() {
           </Reveal>
 
           <Reveal delay={0.08}>
-            <div className="relative min-h-[360px] overflow-hidden border border-[#c8b27d]/60 bg-[#17211d]">
+            <div className="relative min-h-76 overflow-hidden border border-[#c8b27d]/60 bg-[#17211d]">
               <Image
                 src="/lab_feno_logo_fundo_verde.jpg"
                 alt="Marca LabFeno em fundo verde"
                 fill
-                sizes="(max-width: 1024px) 100vw, 420px"
+                sizes="(max-width: 1024px) 100vw, 480px"
                 className="object-cover opacity-90"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#17211d] via-transparent to-transparent" />
-              <div className="absolute bottom-0 p-6 text-[#fbf4e8]">
+              <div className="bg-gradient-to- absolute inset-x-0 bottom-0 h-24 from-[#17211d] via-[#17211d]/82 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 border-t border-[#d8b76d]/25 bg-[#17211d]/77 px-5 py-3 text-[#fbf4e8] backdrop-blur-sm">
                 <p className="font-heading text-xs tracking-[0.2em] text-[#d8b76d] uppercase">
                   Vínculo institucional
                 </p>
-                <p className="mt-3 max-w-sm text-sm leading-6 text-[#eadfca]">
+                <p className="mt-2 max-w-sm text-sm leading-6 text-[#eadfca]">
                   Departamento de Psicologia da UFPR, Prédio Histórico, sala
                   113.
                 </p>
@@ -1458,7 +1465,7 @@ export default function Page() {
           <Reveal delay={0.08}>
             <div className="h-full border border-[#c8b27d]/60 bg-[#fbf8ef]/82 p-8">
               <p className="text-lg leading-9 text-[#4b3a2a]">
-                A revista FHC é editada pelo LabFeno e APFeno, em parceria com
+                A revista PHS é editada pelo LabFeno e APFeno, em parceria com
                 Abrapfe, para divulgar a fenomenologia e suas aplicações às
                 ciências da saúde, humanas, sociais e educação.
               </p>
